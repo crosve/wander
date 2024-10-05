@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        "base-color": "#E1CCBE",
+        "base-color": "#F6EEEA",
+        "lighter-base-color": "#FBF6F4",
+        "darker-base-color": "#E6D6CF",
       },
     },
   },
