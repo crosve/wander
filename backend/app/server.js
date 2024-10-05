@@ -20,7 +20,11 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/signup", (req, res) => {});
+app.post("/uploadImage", (req, res) => {});
+
+app.post("/signup", (req, res) => {
+  const { username, email, password, profile_picture } = req.body;
+});
 
 // Start the server
 app.listen(port, () => {
