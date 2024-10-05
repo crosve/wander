@@ -16,7 +16,8 @@ const db = async () => {
   } catch (e) {
     console.error(e);
   }
-  let db = conn.db("sample_training");
+  let db = conn.db("redhack");
+  return db;
 };
 
 module.exports = {
