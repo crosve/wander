@@ -5,6 +5,8 @@ export default {
     extend: {
       colors: {
         "base-color": "#F6EEEA",
+        "lighter-base-color": "#FBF6F4",
+        "darker-base-color": "#E6D6CF",
       },
     },
   },
