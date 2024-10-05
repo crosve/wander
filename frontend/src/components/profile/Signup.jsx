@@ -69,7 +69,7 @@ const Signup = () => {
         <input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Username"
           value={formData.name}
           onChange={handleChange}
           className="w-full rounded-md border px-4 py-2 shadow-sm focus:outline-none"

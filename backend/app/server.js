@@ -26,6 +26,50 @@ app.get("/", (req, res) => {
 
 app.post("/uploadImage", (req, res) => {});
 
+app.post("/login", async (req, res) => {
+  const { user, password } = req.body;
+
+  try {
+    const database = await db();
+    const usersCollection = database.collection("users");
+
+    const existingUser = await usersCollection.findOne({
+      $or: [{ userName: user }, { email: user }],
+    });
+
+    if (!existingUser) {
+      res.status(400).json({
+        message: "username nor email exist in the database",
+      });
+    }
+
+    console.log("existing user data: ", existingUser);
+    const hashed_password = existingUser.password;
+
+    const correctPassword = await decrypt({
+      password: password,
+      hashed_password: existingUser.hashed_password,
+    });
+
+    const payload = {
+      userId: existingUser._id,
+      hashed: hashed_password,
+    };
+    const token = jwt.sign(payload, process.env.JWT_TOKEN);
+
+    if (correctPassword) {
+      res.status(200).json({
+        message: "success",
+        jwtToken: token,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
+
 app.post("/signup", async (req, res) => {
   const { username, email, password, tags } = req.body;
 
@@ -45,7 +89,7 @@ app.post("/signup", async (req, res) => {
         .json({ message: "User already exists. Either email or username" });
     }
 
-    const hashed_password = encrypt({ password });
+    const hashed_password = await encrypt({ password: password });
 
     const newUser = {
       username,
