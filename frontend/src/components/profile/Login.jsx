@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -10,9 +13,24 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // LOGIN LOGIC HERE
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/login",
+        formData,
+      );
+      console.log(response);
+      if (response.status == 200) {
+        setMessage("Sucess");
+
+        localStorage.setItem("jwtToken", response.data.jwtToken);
+      }
+    } catch (error) {
+      setError(err.response?.data?.message || "An error occurred");
+    }
+
     console.log(formData);
   };
 
@@ -26,7 +44,7 @@ const Login = () => {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Email or Username"
           value={formData.email}
           onChange={handleChange}
           className="w-full rounded-md border px-4 py-2 shadow-sm"
@@ -45,6 +63,8 @@ const Login = () => {
         >
           Login
         </button>
+        {message && <h1 className="text-center text-green-500">{message}</h1>}
+        {error && <h1 className="text-center text-red-600">{error}</h1>}
       </form>
     </div>
   );

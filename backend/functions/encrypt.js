@@ -11,6 +11,7 @@ const encrypt = async ({ password }) => {
 };
 
 const decrypt = async ({ password, hashed_password }) => {
+  console.log(password, hashed_password);
   let match;
   try {
     match = await bcrypt.compare(password, hashed_password);
