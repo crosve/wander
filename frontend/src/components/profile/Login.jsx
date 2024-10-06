@@ -28,7 +28,7 @@ const Login = () => {
         localStorage.setItem("jwtToken", response.data.jwtToken);
       }
     } catch (error) {
-      setError(err.response?.data?.message || "An error occurred");
+      setError(error.response?.data?.message || "An error occurred");
     }
 
     console.log(formData);

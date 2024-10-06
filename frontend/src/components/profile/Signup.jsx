@@ -3,8 +3,7 @@ import axios from "axios";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    userName: "",
+    username: "",
     email: "",
     password: "",
     tags: [],
@@ -68,9 +67,9 @@ const Signup = () => {
         <h2 className="mb-4 text-center text-2xl font-thin">Sign Up</h2>
         <input
           type="text"
-          name="name"
+          name="username"
           placeholder="Username"
-          value={formData.name}
+          value={formData.username}
           onChange={handleChange}
           className="w-full rounded-md border px-4 py-2 shadow-sm focus:outline-none"
         />
@@ -82,6 +81,7 @@ const Signup = () => {
           onChange={handleChange}
           className="w-full rounded-md border px-4 py-2 shadow-sm focus:outline-none"
         />
+
         <input
           type="password"
           name="password"
