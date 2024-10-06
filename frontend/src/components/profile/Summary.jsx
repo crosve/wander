@@ -57,7 +57,7 @@ const ProfileSummary = () => {
   return (
     <>
       <LoggedNavbar />
-      <div className="flex h-screen items-center justify-center bg-lighter-base-color">
+      <div className="bg-lighter-base-color flex h-screen items-center justify-center">
         <div className="rounded-md bg-white p-6 shadow-md">
           <div className="mb-6 flex items-center gap-6">
             {/* Profile picture */}
@@ -84,7 +84,7 @@ const ProfileSummary = () => {
                 />
               ) : (
                 <h1 className="text-3xl">
-                  Hello, {userData ? userData.username : "Guest"}!
+                  Hello, {userData ? userData.username : "loading..."}!
                 </h1>
               )}
 
@@ -96,7 +96,9 @@ const ProfileSummary = () => {
                 />
               ) : (
                 <div className="text-lg">
-                  <span>Email: {userData ? userData.email : "Loading..."}</span>
+                  <span>
+                    Email: {userData ? userData.email : "loading..."}{" "}
+                  </span>
                 </div>
               )}
             </div>
@@ -121,7 +123,7 @@ const ProfileSummary = () => {
 
           {/* Edit button */}
           <button
-            className="mt-6 rounded-md bg-darker-base-color px-4 py-2 text-white transition-all duration-300 hover:scale-105"
+            className="bg-darker-base-color mt-6 rounded-md px-4 py-2 text-white transition-all duration-300 hover:scale-105"
             onClick={toggleEditing}
           >
             {isEditing ? "Save" : "Edit Profile"}
