@@ -34,7 +34,7 @@ app.post("/login", async (req, res) => {
     const usersCollection = database.collection("users");
 
     const existingUser = await usersCollection.findOne({
-      $or: [{ userName: user }, { email: user }],
+      $or: [{ username: user }, { email: user }],
     });
 
     if (!existingUser) {

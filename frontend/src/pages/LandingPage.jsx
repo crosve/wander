@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import testimg1 from "../assets/test-images/test-1.jpg";
 import testimg2 from "../assets/test-images/test-2.jpg";
 import testimg3 from "../assets/test-images/test-3.jpg";
 import testimg4 from "../assets/test-images/test-4.jpg";
 import NavBar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
 
 const images = [testimg1, testimg2, testimg3, testimg4];
 
 const LandingPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      navigate("/feed");
+    }
+  }, []);
 
   const handleNextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
