@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FeedContent = ({ image, title, date, altText }) => {
   const navigate = useNavigate();

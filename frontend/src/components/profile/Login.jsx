@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ user: "", password: "" });
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -53,10 +53,9 @@ const Login = () => {
         >
           <h2 className="mb-4 text-center text-2xl font-thin">Login</h2>
           <input
-            type="email"
-            name="email"
+            name="user"
             placeholder="Email or Username"
-            value={formData.email}
+            value={formData.user}
             onChange={handleChange}
             className="w-full rounded-md border px-4 py-2 shadow-sm"
           />
