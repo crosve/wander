@@ -171,9 +171,11 @@ app.get("/userData", authenticateJWT, async (req, res) => {
   }
 });
 
+//route requires a comment and the postID inorder to update it's
+//comment array
 app.post("/updatecomments", async (req, res) => {
   const { comment, postId } = req.body;
-  if (!comment) {
+  if (!comment || !postId) {
     return res.status(404).json({
       message: "no comment was provided",
     });
@@ -182,9 +184,66 @@ app.post("/updatecomments", async (req, res) => {
   try {
     const database = await db();
     const collections = database.collection("posts");
+
+    const result = await collections.updateOne(
+      { _id: new ObjectId(postId) },
+      {
+        $push: {
+          comments: {
+            description: updateData.comments.description,
+            timeCreated: new Date(),
+          },
+        },
+      }
+    );
+
+    //make sure the data was modified
+    if (result.modifiedCount > 0) {
+      return res.status(200).json({
+        message: "new message inserted",
+      });
+    } else {
+      return res.status(400).json({
+        message: "query was not successful",
+      });
+    }
   } catch (err) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "and error occured when updating comments",
+    });
+  }
+});
+
+//when this is called we can just increment the likes in the post by one
+//we still need the postId to identify what post entry we want to update
+app.post("/updateLikes", async (req, res) => {
+  const { postId } = req.body;
+
+  try {
+    const database = await db();
+    const collection = database.collection("posts");
+
+    const result = await postsCollection.updateOne(
+      { _id: new ObjectId(postId) },
+      {
+        $inc: {
+          likes: 1, // Increment likes by 1
+        },
+      }
+    );
+
+    if (result.modifiedCount > 0) {
+      return res.status(200).json({
+        message: "query was successful",
+      });
+    } else {
+      return res.status(500).json({
+        message: "error occured when updating number of likes",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "error occured when updating number of likes",
     });
   }
 });
