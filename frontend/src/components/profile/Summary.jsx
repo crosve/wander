@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import defaultProfilePicture from "../../assets/test-images/default-profile-picture.webp";
-import LoggedNavbar from "../LoggedNavbar";
+import LoggedNavbar from "../ProfileNavbar";
 import axios from "axios";
 
 const ProfileSummary = () => {
@@ -140,7 +140,6 @@ const ProfileSummary = () => {
               </div>
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">
                 <img src={defaultProfilePicture} alt="Badge" className="mb-4" />
-
                 <p>Badge 2</p>
               </div>
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">

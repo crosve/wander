@@ -4,21 +4,17 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const { ObjectId } = require("mongodb");
 
-const app = express();
-const port = 3000;
-
-const supabase = require("../config/supabase");
 const { encrypt, decrypt } = require("../functions/encrypt");
-
 const { db } = require("../config/mongodb");
 
 require("dotenv").config();
+
+const app = express();
+const port = 3000;
+
 app.use(cors());
-
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -163,8 +159,6 @@ app.get("/userData", authenticateJWT, async (req, res) => {
       res.status(404).json({ message: "User not found" });
     }
 
-    console.log(user);
-
     res.json({
       message: "Protected data accessed",
       user,
@@ -173,6 +167,24 @@ app.get("/userData", authenticateJWT, async (req, res) => {
     console.log(err);
     res.status(400).json({
       message: "Something went wrong please try again later",
+    });
+  }
+});
+
+app.post("/updatecomments", async (req, res) => {
+  const { comment, postId } = req.body;
+  if (!comment) {
+    return res.status(404).json({
+      message: "no comment was provided",
+    });
+  }
+
+  try {
+    const database = await db();
+    const collections = database.collection("posts");
+  } catch (err) {
+    res.status(400).json({
+      message: "and error occured when updating comments",
     });
   }
 });

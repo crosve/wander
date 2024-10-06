@@ -1,4 +1,6 @@
 import React, { useState, useCallback, useRef } from "react";
+import axios from "axios";
+
 import {
   GoogleMap,
   useLoadScript,
@@ -48,10 +50,38 @@ const NewLocationForm = ({ onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    onClose();
+    const formDataWithImages = new FormData();
+
+    formDataWithImages.append("title", formData.title);
+    formDataWithImages.append("description", formData.description);
+    formDataWithImages.append("likes", formData.likes);
+    formDataWithImages.append("Lat", formData.Lat);
+    formDataWithImages.append("Long", formData.Long);
+
+    formData.Images.forEach((file, index) => {
+      formDataWithImages.append(`Images[${index}]`, file);
+    });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/uploadimage",
+        formDataWithImages,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      if (response.status === 200) {
+        console.log("Location added successfully!", response.data);
+        onClose();
+      }
+    } catch (err) {
+      console.log("Error adding location:", err);
+    }
   };
 
   const onMapClick = useCallback((event) => {
@@ -191,7 +221,7 @@ const NewLocationForm = ({ onClose }) => {
             </button>
             <button
               type="submit"
-              className="bg-darker-base-color rounded-md px-3 py-1 text-white shadow-md transition-all duration-300 hover:scale-105"
+              className="rounded-md bg-darker-base-color px-3 py-1 text-white shadow-md transition-all duration-300 hover:scale-105"
             >
               Submit
             </button>
