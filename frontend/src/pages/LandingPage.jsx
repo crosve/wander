@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import testimg1 from "../assets/test-images/test-1.jpg";
 import testimg2 from "../assets/test-images/test-2.jpg";
@@ -12,16 +12,29 @@ const images = [testimg1, testimg2, testimg3, testimg4];
 const LandingPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const discoverRef = useRef(null); // Reference for "Discover Hidden Gems" section
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
       navigate("/feed");
     }
-  }, []);
+  }, [navigate]);
 
   const handleNextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const handleScrollToDiscover = () => {
+    discoverRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleNavigateToLogin = () => {
+    navigate("/login"); // Navigate to login page
+  };
+
+  const handleNavigateToSignUp = () => {
+    navigate("/signup"); // Navigate to sign-up page
   };
 
   return (
@@ -35,7 +48,7 @@ const LandingPage = () => {
               Explore Wander
             </h1>
             <h2 className="mt-4 text-2xl text-text-color sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-              Discover new experiences
+              Discover New Experiences
             </h2>
           </div>
           <div className="relative mt-48 h-[400px] w-[90%] max-w-[700px] sm:h-[300px] sm:max-w-[95%] md:h-[500px] md:max-w-[80%] lg:max-w-[70%]">
@@ -96,13 +109,19 @@ const LandingPage = () => {
           />
           <div className="p-8 text-center md:text-left">
             <h3 className="text-2xl font-bold sm:text-xl md:text-2xl lg:text-3xl">
-              About Wander
+              About the Project
             </h3>
             <p className="mt-4 text-base sm:text-sm md:text-base lg:text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-              ratione, hic esse quas nostrum temporibus?
+              Wander is a web app where users can create and share travel plans,
+              leaving comments on the location, all stored securely using Pinata
+              API and IPFS. It promotes well-being, offers engaging
+              entertainment, boosts productivity in trip planning, and fosters a
+              connected community of travelers.
             </p>
-            <button className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white sm:text-sm md:text-base lg:text-lg">
+            <button
+              className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg"
+              onClick={handleScrollToDiscover}
+            >
               Learn More
             </button>
           </div>
@@ -111,7 +130,7 @@ const LandingPage = () => {
         {/* Section 2 */}
         <div className="flex flex-col items-center bg-lighter-base-color px-4 py-16 md:flex-row-reverse">
           <img
-            src={testimg1}
+            src={testimg2}
             className="mb-8 h-auto w-full max-w-[90%] rounded-md sm:max-w-[80%] md:mb-0 md:ml-8 md:w-[45%]"
           />
           <div className="p-8 text-center md:text-left">
@@ -119,10 +138,13 @@ const LandingPage = () => {
               Discover Hidden Gems
             </h3>
             <p className="mt-4 text-base sm:text-sm md:text-base lg:text-lg">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur
-              inventore eum voluptatum repellat eligendi dignissimos?
+              Uncover hidden gems and explore unique, off-the-beaten-path
+              destinations for a truly authentic travel experience.
             </p>
-            <button className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white sm:text-sm md:text-base lg:text-lg">
+            <button
+              className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg"
+              onClick={handleNavigateToLogin}
+            >
               View Gallery
             </button>
           </div>
@@ -130,10 +152,13 @@ const LandingPage = () => {
 
         {/* Footer */}
         <div className="bg-base-color py-8 text-center text-white">
-          <h4 className="text-xl font-bold sm:text-lg md:text-xl lg:text-2xl">
-            Sign up today
+          <h4 className="text-xl font-thin text-gray-800 sm:text-lg md:text-xl lg:text-2xl">
+            Sign up today!
           </h4>
-          <button className="mt-4 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white sm:text-sm md:text-base lg:text-lg">
+          <button
+            className="mt-4 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg"
+            onClick={handleNavigateToSignUp}
+          >
             Sign up
           </button>
         </div>

@@ -61,7 +61,7 @@ const NewLocationForm = ({ onClose }) => {
     formDataWithImages.append("Long", formData.Long);
 
     formData.Images.forEach((file, index) => {
-      formDataWithImages.append(`Images[${index}]`, file);
+      formDataWithImages.append(`Images`, file);
     });
 
     try {
@@ -199,9 +199,7 @@ const NewLocationForm = ({ onClose }) => {
           </div>
 
           <div className="mb-2">
-            <label className="block text-sm font-semibold">
-              Upload Image(s)
-            </label>
+            <label className="block text-sm font-semibold">Upload Image</label>
             <input
               type="file"
               multiple
