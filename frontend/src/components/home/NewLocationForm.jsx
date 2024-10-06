@@ -61,7 +61,7 @@ const NewLocationForm = ({ onClose }) => {
     formDataWithImages.append("Long", formData.Long);
 
     formData.Images.forEach((file, index) => {
-      formDataWithImages.append(`Images[${index}]`, file);
+      formDataWithImages.append(`Images`, file);
     });
 
     try {
@@ -221,7 +221,7 @@ const NewLocationForm = ({ onClose }) => {
             </button>
             <button
               type="submit"
-              className="rounded-md bg-darker-base-color px-3 py-1 text-white shadow-md transition-all duration-300 hover:scale-105"
+              className="bg-darker-base-color rounded-md px-3 py-1 text-white shadow-md transition-all duration-300 hover:scale-105"
             >
               Submit
             </button>

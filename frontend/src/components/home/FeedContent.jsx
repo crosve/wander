@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const FeedContent = ({ image, title, date, altText }) => {
+const FeedContent = ({ image, title, date, altText, data }) => {
   const navigate = useNavigate();
 
   const handleLearnMore = () => {
@@ -11,6 +11,7 @@ const FeedContent = ({ image, title, date, altText }) => {
         imageUrl: image,
         date,
         altText,
+        data,
       },
     });
   };
@@ -27,7 +28,7 @@ const FeedContent = ({ image, title, date, altText }) => {
         <p className="mb-4 text-sm text-gray-500">{date}</p>
         <button
           onClick={handleLearnMore}
-          className="rounded bg-darker-base-color px-4 py-2 text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80"
+          className="bg-darker-base-color rounded px-4 py-2 text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80"
         >
           Learn More
         </button>
