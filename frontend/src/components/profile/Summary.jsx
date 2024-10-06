@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import defaultProfilePicture from "../../assets/test-images/default-profile-picture.webp";
 import LoggedNavbar from "../ProfileNavbar";
 import axios from "axios";
+import fire from "../../assets/test-images/bonfire.webp";
+import leaf from "../../assets/test-images/leaf.webp";
+import wave from "../../assets/test-images/waves.webp";
 
 const ProfileSummary = () => {
-  const [name, setName] = useState("User");
-  const [email, setEmail] = useState("placeholder@email.com");
+  const [name, setName] = useState("Username");
+  const [email, setEmail] = useState("Email");
   const [bio, setBio] = useState(
     "Hello World! (You can update your bio by clicking on the Edit Profile button.)",
   );
   const [isEditing, setIsEditing] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
-  const [memberSince] = useState("January 2024");
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
 
@@ -57,8 +59,8 @@ const ProfileSummary = () => {
   return (
     <>
       <LoggedNavbar />
-      <div className="bg-lighter-base-color flex h-screen items-center justify-center">
-        <div className="rounded-md bg-white p-6 shadow-md">
+      <div className="flex h-screen items-center justify-center bg-lighter-base-color">
+        <div className="rounded-md p-6 shadow-md">
           <div className="mb-6 flex items-center gap-6">
             {/* Profile picture */}
             <div className="relative h-32 w-32">
@@ -105,9 +107,6 @@ const ProfileSummary = () => {
           </div>
           <div className="mb-6 flex flex-col gap-4">
             <div className="text-lg">
-              <span>Member Since: </span> {memberSince}
-            </div>
-            <div className="text-lg">
               <span>Bio: </span>{" "}
               {isEditing ? (
                 <textarea
@@ -123,7 +122,7 @@ const ProfileSummary = () => {
 
           {/* Edit button */}
           <button
-            className="bg-darker-base-color mt-6 rounded-md px-4 py-2 text-white transition-all duration-300 hover:scale-105"
+            className="mt-6 rounded-md bg-darker-base-color px-4 py-2 text-white transition-all duration-300 hover:scale-105"
             onClick={toggleEditing}
           >
             {isEditing ? "Save" : "Edit Profile"}
@@ -135,16 +134,12 @@ const ProfileSummary = () => {
             <div className="grid grid-cols-3 gap-4">
               {/* Placeholder examples */}
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">
-                <img src={defaultProfilePicture} alt="Badge" className="mb-4" />
-                <p>Badge 1</p>
+                <img src={fire} alt="Badge" className="mb-4" />
+                <p>Camping</p>
               </div>
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">
-                <img src={defaultProfilePicture} alt="Badge" className="mb-4" />
-                <p>Badge 2</p>
-              </div>
-              <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">
-                <img src={defaultProfilePicture} alt="Badge" className="mb-4" />
-                <p>Badge 3</p>
+                <img src={leaf} alt="Badge" className="mb-4" />
+                <p>Nature</p>
               </div>
             </div>
           </div>

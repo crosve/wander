@@ -48,7 +48,7 @@ const Home = () => {
   return (
     <>
       <LoggedNavbar />
-      <div className="min-h-screen bg-lighter-base-color">
+      <div className="min-h-screen bg-lighter-base-color pb-8">
         <div className="mx-auto max-w-screen-lg pt-32">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {posts.length > 0 ? (
@@ -64,31 +64,6 @@ const Home = () => {
             ) : (
               <p>Loading...</p>
             )}
-            {/* Sample FeedContent components with test images */}
-            <FeedContent
-              image={testimg1}
-              title="Sample Title 1"
-              date="1/1/24"
-              data={{}}
-            />
-            <FeedContent
-              image={testimg2}
-              title="Sample Title 2"
-              date="1/1/24"
-              data={{}}
-            />
-            <FeedContent
-              image={testimg3}
-              title="Sample Title 3"
-              date="1/1/24"
-              data={{}}
-            />
-            <FeedContent
-              image={testimg4}
-              title="Sample Title 4"
-              date="1/1/24"
-              data={{}}
-            />
           </div>
         </div>
         <div className="relative">

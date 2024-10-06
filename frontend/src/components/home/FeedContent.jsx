@@ -25,7 +25,7 @@ const FeedContent = ({ image, title, date, altText, data }) => {
       <img
         src={image}
         alt={altText}
-        className="h-96 w-full rounded-md object-cover shadow-lg"
+        className="h-96 w-full rounded-md object-cover shadow-lg transition-all duration-300 hover:scale-105 hover:opacity-90"
       />
       <div className="mt-4 text-center">
         <h2 className="mb-2 text-2xl font-semibold">{title}</h2>
