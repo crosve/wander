@@ -12,7 +12,7 @@ const images = [testimg1, testimg2, testimg3, testimg4];
 const LandingPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
-  const discoverRef = useRef(null); // Reference for "Discover Hidden Gems" section
+  const discoverRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -128,7 +128,10 @@ const LandingPage = () => {
         </div>
 
         {/* Section 2 */}
-        <div className="flex flex-col items-center bg-lighter-base-color px-4 py-16 md:flex-row-reverse">
+        <div
+          ref={discoverRef}
+          className="flex flex-col items-center bg-lighter-base-color px-4 py-16 md:flex-row-reverse"
+        >
           <img
             src={testimg2}
             className="mb-8 h-auto w-full max-w-[90%] rounded-md sm:max-w-[80%] md:mb-0 md:ml-8 md:w-[45%]"

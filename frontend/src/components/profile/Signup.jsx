@@ -122,8 +122,8 @@ const Signup = () => {
           >
             Sign Up
           </button>
-          {error && <h1 className="text-center text-red-500">{error}</h1>}
-          {message && <h1 className="text-center text-green-500">{message}</h1>}
+          {error && <h1 className="text-center text-green-500">{error}</h1>}
+          {message && <h1 className="text-center text-red-500">{message}</h1>}
         </form>
       </div>
     </>

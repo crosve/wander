@@ -49,14 +49,11 @@ const MapsPage = () => {
     long: -73.968285,
   });
 
-  // Update the location state when the component mounts
   useEffect(() => {
     console.log("Location data received in MapsPage:", locationData.state);
 
     if (locationData.state) {
       const { title, imageUrl, data } = locationData.state;
-
-      // Access Lat and Long from within the `data` object
       const { Lat, Long } = data;
 
       console.log("Using Lat, Long:", Lat, Long);
@@ -67,13 +64,12 @@ const MapsPage = () => {
         likes: generateRandomLikes(),
         description: data.description || "Default description",
         comments: generateRandomComments(),
-        lat: Lat || 40.785091, // Use `Lat` from `data`
-        long: Long || -73.968285, // Use `Long` from `data`
+        lat: Lat || 40.785091,
+        long: Long || -73.968285,
       });
     }
   }, [locationData.state]);
 
-  // Load the Google Maps script and initialize the map after location is updated
   useEffect(() => {
     const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAL1kzmsE0Hzl28qm5Trp1_s76quJnsHEY`;
@@ -82,7 +78,6 @@ const MapsPage = () => {
     document.head.appendChild(script);
 
     script.onload = () => {
-      // Initialize the map with updated location
       mapRef.current = new window.google.maps.Map(
         document.getElementById("map"),
         {
@@ -91,7 +86,6 @@ const MapsPage = () => {
         },
       );
 
-      // Initialize the marker
       markerRef.current = new window.google.maps.Marker({
         position: { lat: location.lat, lng: location.long },
         map: mapRef.current,
@@ -104,12 +98,9 @@ const MapsPage = () => {
     };
   }, [location.lat, location.long]);
 
-  // Update marker and map center whenever location's lat or long changes
   useEffect(() => {
     if (mapRef.current && markerRef.current) {
-      // Set new marker position
       markerRef.current.setPosition({ lat: location.lat, lng: location.long });
-      // Center the map to new position
       mapRef.current.setCenter({ lat: location.lat, lng: location.long });
     }
     console.log("Updated location:", location);
@@ -118,34 +109,42 @@ const MapsPage = () => {
   return (
     <>
       <LoggedNavbar />
-      <div className="flex h-screen bg-lighter-base-color pt-20">
+      <div className="flex min-h-screen flex-col bg-lighter-base-color pt-20 lg:flex-row">
         {/* Map */}
-        <div id="map" className="h-full w-2/3"></div>
+        <div
+          id="map"
+          className="min-h-[300px] w-full lg:min-h-full lg:w-2/3"
+        ></div>
 
         {/* Side container */}
-        <div className="h-full w-1/3 overflow-scroll overflow-y-auto bg-lighter-base-color p-6 shadow-lg">
-          <h2 className="mb-4 text-2xl">{location.title}</h2>
+        <div className="h-auto w-full overflow-scroll bg-lighter-base-color p-4 shadow-lg lg:h-full lg:w-1/3 lg:p-6">
+          <h2 className="mb-2 text-xl lg:mb-4 lg:text-2xl">{location.title}</h2>
 
           <img
             src={location.imageUrl}
             alt={location.title}
-            className="mb-4 rounded-lg shadow-md"
+            className="mb-2 rounded-lg shadow-md lg:mb-4"
           />
 
-          <div className="mb-4 flex items-center gap-2 text-lg">
+          <div className="mb-2 flex items-center gap-2 text-lg lg:mb-4">
             <FaHeart className="text-rose-500" />
             <span className="font-semibold">Likes: {location.likes}</span>
           </div>
 
-          <p className="mb-4 text-lg">{location.description}</p>
+          <p className="mb-2 text-base lg:mb-4 lg:text-lg">
+            {location.description}
+          </p>
 
-          <h3 className="mb-2 text-xl">
+          <h3 className="mb-1 text-lg lg:mb-2 lg:text-xl">
             <FaComment className="mr-2 inline-block text-emerald-500" />{" "}
             Comments
           </h3>
-          <ul className="space-y-4">
+          <ul className="space-y-2 lg:space-y-4">
             {location.comments.map((comment, index) => (
-              <li key={index} className="rounded-lg bg-white p-4 shadow-sm">
+              <li
+                key={index}
+                className="rounded-lg bg-white p-3 shadow-sm lg:p-4"
+              >
                 <p className="font-semibold">{comment.user}</p>
                 <p>{comment.text}</p>
               </li>
