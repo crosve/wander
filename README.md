@@ -26,7 +26,7 @@ Google Maps API key
 
    Install dependencies for both the frontend and backend:
 
-   ````Frontend:
+   ```Frontend:
 
    cd frontend
 
@@ -36,9 +36,9 @@ Google Maps API key
 
    cd backend
 
-   npm install```
+   npm install
 
-   ````
+   ```
 
 3. Set Up Environment Variables:
    Create a .env file in the root of the backend folder and add the following environment variables:
@@ -59,7 +59,7 @@ Google Maps API key
 
 4. Run the Project
 
-   ````Frontend:
+   ```Frontend:
 
    cd frontend
 
@@ -69,8 +69,8 @@ Google Maps API key
 
    cd backend
 
-   npm start```
+   npm start
 
-   ````
+   ```
 
 5. Access the Application at your local host.
