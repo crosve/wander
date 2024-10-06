@@ -6,6 +6,7 @@ const { ObjectId } = require("mongodb");
 
 const { encrypt, decrypt } = require("../functions/encrypt");
 const { db } = require("../config/mongodb");
+const uploadImageRouter = require("./routes/uploadImage.js");
 
 require("dotenv").config();
 
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/uploadImage", (req, res) => {});
+app.use("/uploadImage", uploadImageRouter);
 
 app.post("/login", async (req, res) => {
   const { user, password } = req.body;
@@ -245,6 +246,22 @@ app.post("/updateLikes", async (req, res) => {
     return res.status(500).json({
       message: "error occured when updating number of likes",
     });
+  }
+});
+
+app.get("/posts", async (req, res) => {
+  try {
+    console.log("here");
+    const database = await db();
+    const collection = database.collection("posts");
+
+    const posts = await collection.find({}).toArray();
+    console.log(posts);
+
+    return res.status(200).json(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return res.status(500).json({ message: "Error fetching posts", error });
   }
 });
 
