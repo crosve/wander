@@ -199,9 +199,7 @@ const NewLocationForm = ({ onClose }) => {
           </div>
 
           <div className="mb-2">
-            <label className="block text-sm font-semibold">
-              Upload Image(s)
-            </label>
+            <label className="block text-sm font-semibold">Upload Image</label>
             <input
               type="file"
               multiple
