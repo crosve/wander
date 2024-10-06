@@ -96,7 +96,7 @@ const ProfileSummary = () => {
                 />
               ) : (
                 <div className="text-lg">
-                  <span>Email: {userData.email} </span>
+                  <span>Email: {userData ? userData.email : "Loading..."}</span>
                 </div>
               )}
             </div>
@@ -138,7 +138,6 @@ const ProfileSummary = () => {
               </div>
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">
                 <img src={defaultProfilePicture} alt="Badge" className="mb-4" />
-
                 <p>Badge 2</p>
               </div>
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">
