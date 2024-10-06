@@ -1,10 +1,11 @@
-require("dotenv").config();
-
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs'); 
 const path = require('path');
-// const { db } = require('./mongodb');
+
+const { db } = require("./config/mongodb");
+
+require("dotenv").config();
 
 API_Key = process.env.API_Key;
 API_Secret = process.env.API_Secret;
@@ -19,7 +20,7 @@ API_Secret = process.env.API_Secret;
  * @throws {Error} - Throws an error if the upload fails.
  */
 
-const uploadToIPFS = async (filePath, caption) => {
+const uploadToIPFS = async (filePath, caption, username) => {
     const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
     const formData = new FormData();
     formData.append('file', fs.createReadStream(filePath));
@@ -50,7 +51,7 @@ const uploadToIPFS = async (filePath, caption) => {
 
     const ipfsHash = response.data.IpfsHash;
     
-    await insertData({ ipfsHash, caption });
+    await insertData({ ipfsHash, caption, username});
 
     return ipfsHash;
 }
@@ -91,12 +92,27 @@ const downloadFromIPFS = async (ipfsHash, destinationPath) => {
     }
 }
 
-(async () => {
-    const ipfsHash = 'bafkreieomeqtrn4r5b6jvngyg2y4jigoo2gvownxqlisc24o7tmz4fhapa'; // gona replace this with actual hash
-    const destinationPath = './downloads'; // path where the file will be saved (for now)
-    const downloadedFile = await downloadFromIPFS(ipfsHash, destinationPath);
-    console.log('File downloaded at:', downloadedFile);
-})();
+
+/**
+ * Inserts IPFS hash data into the user's CID array in the ManGo database.
+ *
+ * @param {Object} params - The parameters for the function.
+ * @param {string} params.ipfsHash - The IPFS hash to be inserted.
+ * @param {string} params.username - The username of the user whose CID array will be updated.
+ * @returns {Promise<void>} - A promise that resolves when the data has been successfully updated.
+ */
+const insertData = async ({ ipfsHash, username }) => {
+    const database = await db();
+    const usersCollection = database.collection("users");
+
+    // Update the user's CID array
+    await usersCollection.updateOne(
+        { username },
+        { $push: { CID: ipfsHash } }
+    );
+
+    console.log('Data updated successfully');
+};
 
 module.exports = {
     uploadToIPFS, 
