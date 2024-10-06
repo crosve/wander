@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../NavBar";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,15 @@ const Signup = () => {
     password: "",
     tags: [],
   });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      navigate("/feed");
+    }
+  }, []);
 
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
