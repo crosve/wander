@@ -43,12 +43,12 @@ const MapsPage = () => {
   return (
     <>
       <LoggedNavbar />
-      <div className="bg-lighter-base-color flex h-screen pt-20">
+      <div className="flex h-screen bg-lighter-base-color pt-20">
         {/* Map */}
         <div id="map" className="h-full w-2/3"></div>
 
         {/* Side container */}
-        <div className="bg-lighter-base-color h-full w-1/3 overflow-scroll overflow-y-auto p-6 shadow-lg">
+        <div className="h-full w-1/3 overflow-scroll overflow-y-auto bg-lighter-base-color p-6 shadow-lg">
           <h2 className="mb-4 text-2xl">{location.title}</h2>
 
           <img
@@ -58,14 +58,15 @@ const MapsPage = () => {
           />
 
           <div className="mb-4 flex items-center gap-2 text-lg">
-            <FaHeart className="text-blue-500" />
+            <FaHeart className="text-rose-500" />
             <span className="font-semibold">Likes: {location.likes}</span>
           </div>
 
           <p className="mb-4 text-lg">{location.description}</p>
 
           <h3 className="mb-2 text-xl">
-            <FaComment className="mr-2 inline-block" /> Comments
+            <FaComment className="mr-2 inline-block text-emerald-500" />{" "}
+            Comments
           </h3>
           <ul className="space-y-4">
             {location.comments.map((comment, index) => (

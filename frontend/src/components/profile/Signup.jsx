@@ -72,7 +72,7 @@ const Signup = () => {
   return (
     <>
       <NavBar />
-      <div className="bg-lighter-base-color flex h-screen items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-lighter-base-color">
         <form
           className="max-w-sm space-y-6 rounded-md bg-white p-8 shadow-md"
           onSubmit={handleSubmit}
@@ -103,18 +103,22 @@ const Signup = () => {
             onChange={handleChange}
             className="w-full rounded-md border px-4 py-2 shadow-sm focus:outline-none"
           />
+          <p className="">Select cities you are interested in:</p>
           <select
-            className="w-full rounded-md border px-4 py-2 shadow-sm focus:outline-none"
+            className="w-full rounded-md border p-2 shadow-sm focus:outline-none"
             name="tags"
-            placeholder="select location tags"
+            placeholder="Select city tags"
             multiple
             onChange={(e) => addTags(e)}
           >
-            <option value="NYC">Newyork City</option>
+            <option value="NYC">New York City</option>
+            <option value="Chicago">Chicago</option>
+            <option value="LA">Los Angeles</option>
+            <option value="Houston">Houston</option>
           </select>
           <button
             type="submit"
-            className="bg-darker-base-color w-full rounded-md py-2 text-white shadow-md transition-all duration-300 hover:scale-105"
+            className="w-full rounded-md bg-darker-base-color py-2 text-white shadow-md transition-all duration-300 hover:scale-105"
           >
             Sign Up
           </button>

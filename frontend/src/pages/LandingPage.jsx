@@ -32,10 +32,10 @@ const LandingPage = () => {
         <div className="relative flex h-screen flex-col items-center justify-center bg-lighter-base-color px-4 text-black">
           <div className="absolute left-0 top-24 flex w-full flex-col items-center">
             <h1 className="text-4xl font-bold text-text-color sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-              Explore Wander
+              Explore Traktty
             </h1>
             <h2 className="mt-4 text-2xl text-text-color sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-              Discover new experiences
+              Discover New Experiences
             </h2>
           </div>
           <div className="relative mt-48 h-[400px] w-[90%] max-w-[700px] sm:h-[300px] sm:max-w-[95%] md:h-[500px] md:max-w-[80%] lg:max-w-[70%]">
@@ -96,13 +96,14 @@ const LandingPage = () => {
           />
           <div className="p-8 text-center md:text-left">
             <h3 className="text-2xl font-bold sm:text-xl md:text-2xl lg:text-3xl">
-              About Wander
+              About the Project
             </h3>
             <p className="mt-4 text-base sm:text-sm md:text-base lg:text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-              ratione, hic esse quas nostrum temporibus?
+              Trakty is a web app where users can create and share travel plans,
+              leaving comments or sticky notes on street views, all stored
+              securely using Pinata API and IPFS.
             </p>
-            <button className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white sm:text-sm md:text-base lg:text-lg">
+            <button className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg">
               Learn More
             </button>
           </div>
@@ -119,10 +120,10 @@ const LandingPage = () => {
               Discover Hidden Gems
             </h3>
             <p className="mt-4 text-base sm:text-sm md:text-base lg:text-lg">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur
-              inventore eum voluptatum repellat eligendi dignissimos?
+              Uncover hidden gems and explore unique, off-the-beaten-path
+              destinations for a truly authentic travel experience.
             </p>
-            <button className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white sm:text-sm md:text-base lg:text-lg">
+            <button className="mt-6 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg">
               View Gallery
             </button>
           </div>
@@ -130,10 +131,10 @@ const LandingPage = () => {
 
         {/* Footer */}
         <div className="bg-base-color py-8 text-center text-white">
-          <h4 className="text-xl font-bold sm:text-lg md:text-xl lg:text-2xl">
-            Sign up today
+          <h4 className="text-xl font-thin text-gray-800 sm:text-lg md:text-xl lg:text-2xl">
+            Sign up today!
           </h4>
-          <button className="mt-4 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white sm:text-sm md:text-base lg:text-lg">
+          <button className="mt-4 rounded-md bg-darker-base-color px-6 py-3 text-lg text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80 sm:text-sm md:text-base lg:text-lg">
             Sign up
           </button>
         </div>
