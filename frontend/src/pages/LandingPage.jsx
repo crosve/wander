@@ -89,7 +89,7 @@ const LandingPage = () => {
         </div>
 
         {/* Section 1 */}
-        <div className="flex flex-col items-center bg-gray-100 px-4 py-16 md:flex-row">
+        <div className="flex flex-col items-center bg-lighter-base-color px-4 py-16 md:flex-row">
           <img
             src={testimg1}
             className="mb-8 h-auto w-full max-w-[90%] rounded-md sm:max-w-[80%] md:mb-0 md:mr-8 md:w-[45%]"
@@ -109,7 +109,7 @@ const LandingPage = () => {
         </div>
 
         {/* Section 2 */}
-        <div className="flex flex-col items-center bg-gray-100 px-4 py-16 md:flex-row-reverse">
+        <div className="flex flex-col items-center bg-lighter-base-color px-4 py-16 md:flex-row-reverse">
           <img
             src={testimg1}
             className="mb-8 h-auto w-full max-w-[90%] rounded-md sm:max-w-[80%] md:mb-0 md:ml-8 md:w-[45%]"
