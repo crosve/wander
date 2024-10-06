@@ -36,8 +36,8 @@ const generateRandomLikes = () => {
 
 const MapsPage = () => {
   const locationData = useLocation();
-  const mapRef = useRef(null); // Reference to store the map
-  const markerRef = useRef(null); // Reference to store the marker
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
 
   const [location, setLocation] = useState({
     title: "Default Title",
@@ -45,25 +45,36 @@ const MapsPage = () => {
     likes: generateRandomLikes(),
     description: "Default description",
     comments: generateRandomComments(),
-    lat: 40.785091, // Default latitude
-    long: -73.968285, // Default longitude
+    lat: 40.785091,
+    long: -73.968285,
   });
 
+  // Update the location state when the component mounts
   useEffect(() => {
+    console.log("Location data received in MapsPage:", locationData.state);
+
     if (locationData.state) {
-      // Access Lat and Long from the state with capitalized letters
-      const { title, imageUrl, data, Lat, Long } = locationData.state;
+      const { title, imageUrl, data } = locationData.state;
+
+      // Access Lat and Long from within the `data` object
+      const { Lat, Long } = data;
+
+      console.log("Using Lat, Long:", Lat, Long);
+
       setLocation({
         title: title || "Default Title",
         imageUrl: imageUrl || "",
         likes: generateRandomLikes(),
         description: data.description || "Default description",
         comments: generateRandomComments(),
-        lat: Lat || 40.785091, // Use capitalized Lat from state or default
-        long: Long || -73.968285, // Use capitalized Long from state or default
+        lat: Lat || 40.785091, // Use `Lat` from `data`
+        long: Long || -73.968285, // Use `Long` from `data`
       });
     }
+  }, [locationData.state]);
 
+  // Load the Google Maps script and initialize the map after location is updated
+  useEffect(() => {
     const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAL1kzmsE0Hzl28qm5Trp1_s76quJnsHEY`;
     script.async = true;
@@ -71,11 +82,11 @@ const MapsPage = () => {
     document.head.appendChild(script);
 
     script.onload = () => {
-      // Initialize the map
+      // Initialize the map with updated location
       mapRef.current = new window.google.maps.Map(
         document.getElementById("map"),
         {
-          center: { lat: location.lat, lng: location.long }, // Initial center
+          center: { lat: location.lat, lng: location.long },
           zoom: 12,
         },
       );
@@ -91,7 +102,7 @@ const MapsPage = () => {
     return () => {
       document.head.removeChild(script);
     };
-  }, []);
+  }, [location.lat, location.long]);
 
   // Update marker and map center whenever location's lat or long changes
   useEffect(() => {
@@ -101,7 +112,8 @@ const MapsPage = () => {
       // Center the map to new position
       mapRef.current.setCenter({ lat: location.lat, lng: location.long });
     }
-  }, [location.lat, location.long]); // Triggered when lat or long changes
+    console.log("Updated location:", location);
+  }, [location.lat, location.long]);
 
   return (
     <>
