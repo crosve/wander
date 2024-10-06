@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import NavBar from "../NavBar";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -47,8 +46,7 @@ const Login = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="bg-lighter-base-color flex h-screen items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-lighter-base-color">
         <form
           className="max-w-sm space-y-6 rounded-md bg-white p-8 shadow-md"
           onSubmit={handleSubmit}
@@ -72,7 +70,7 @@ const Login = () => {
           />
           <button
             type="submit"
-            className="bg-base-color w-full rounded-md py-2 text-white shadow-md transition-all duration-300 hover:scale-105"
+            className="w-full rounded-md bg-base-color py-2 text-white shadow-md transition-all duration-300 hover:scale-105"
           >
             Login
           </button>
