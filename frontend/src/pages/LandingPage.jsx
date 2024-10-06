@@ -32,7 +32,7 @@ const LandingPage = () => {
         <div className="relative flex h-screen flex-col items-center justify-center bg-lighter-base-color px-4 text-black">
           <div className="absolute left-0 top-24 flex w-full flex-col items-center">
             <h1 className="text-4xl font-bold text-text-color sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-              Explore Traktty
+              Explore Wander
             </h1>
             <h2 className="mt-4 text-2xl text-text-color sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
               Discover New Experiences
