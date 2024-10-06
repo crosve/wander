@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const { ObjectId } = require("mongodb");
 
 const app = express();
 const port = 3000;
@@ -118,6 +119,58 @@ app.post("/signup", async (req, res) => {
     console.error("Error signing up user:", err);
     res.status(500).json({
       message: "Internal server error",
+    });
+  }
+});
+
+const authenticateJWT = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, process.env.JWT_TOKEN, (err, user) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
+
+      req.user = user;
+      next();
+    });
+  } else {
+    res.sendStatus(401);
+  }
+};
+
+app.get("/userData", authenticateJWT, async (req, res) => {
+  // Access the authenticated user data using req.user
+  const userData = req.user;
+
+  console.log("user data being sent: ", userData);
+
+  try {
+    const database = await db();
+    const collection = database.collection("users");
+    const userId = new ObjectId(userData.userId);
+    const user = await collection.findOne({ _id: userId });
+    console.log(user);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    //6701d7d30965ba85b7fa9a13
+    //6701d7d30965ba85b7fa9a13
+
+    console.log(user);
+
+    res.json({
+      message: "Protected data accessed",
+      user,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      message: "Something went wrong please try again later",
     });
   }
 });
