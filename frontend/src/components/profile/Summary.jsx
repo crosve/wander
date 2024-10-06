@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import defaultProfilePicture from "../../assets/test-images/default-profile-picture.webp";
-import LoggedNavbar from "../LoggedNavbar";
+import LoggedNavbar from "../ProfileNavbar";
 import axios from "axios";
 
 const ProfileSummary = () => {
