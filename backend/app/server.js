@@ -162,8 +162,6 @@ app.get("/userData", authenticateJWT, async (req, res) => {
     if (!user) {
       res.status(404).json({ message: "User not found" });
     }
-    //6701d7d30965ba85b7fa9a13
-    //6701d7d30965ba85b7fa9a13
 
     console.log(user);
 

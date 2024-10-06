@@ -83,7 +83,9 @@ const ProfileSummary = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
               ) : (
-                <h1 className="text-3xl">Hello, {userData.username}!</h1>
+                <h1 className="text-3xl">
+                  Hello, {userData ? userData.username : "loading..."}!
+                </h1>
               )}
 
               {isEditing ? (
@@ -94,7 +96,9 @@ const ProfileSummary = () => {
                 />
               ) : (
                 <div className="text-lg">
-                  <span>Email: {userData.email} </span>
+                  <span>
+                    Email: {userData ? userData.email : "loading..."}{" "}
+                  </span>
                 </div>
               )}
             </div>
