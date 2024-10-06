@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import defaultProfilePicture from "../../assets/test-images/default-profile-picture.webp";
-import LoggedNavbar from "../LoggedNavbar";
+import LoggedNavbar from "../ProfileNavbar";
 import axios from "axios";
 
 const ProfileSummary = () => {
@@ -57,7 +57,7 @@ const ProfileSummary = () => {
   return (
     <>
       <LoggedNavbar />
-      <div className="bg-lighter-base-color flex h-screen items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-lighter-base-color">
         <div className="rounded-md bg-white p-6 shadow-md">
           <div className="mb-6 flex items-center gap-6">
             {/* Profile picture */}
@@ -83,7 +83,9 @@ const ProfileSummary = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
               ) : (
-                <h1 className="text-3xl">Hello, {userData.username}!</h1>
+                <h1 className="text-3xl">
+                  Hello, {userData ? userData.username : "Guest"}!
+                </h1>
               )}
 
               {isEditing ? (
@@ -94,7 +96,7 @@ const ProfileSummary = () => {
                 />
               ) : (
                 <div className="text-lg">
-                  <span>Email: {userData.email} </span>
+                  <span>Email: {userData ? userData.email : "Loading..."}</span>
                 </div>
               )}
             </div>
@@ -119,7 +121,7 @@ const ProfileSummary = () => {
 
           {/* Edit button */}
           <button
-            className="bg-darker-base-color mt-6 rounded-md px-4 py-2 text-white transition-all duration-300 hover:scale-105"
+            className="mt-6 rounded-md bg-darker-base-color px-4 py-2 text-white transition-all duration-300 hover:scale-105"
             onClick={toggleEditing}
           >
             {isEditing ? "Save" : "Edit Profile"}
@@ -136,7 +138,6 @@ const ProfileSummary = () => {
               </div>
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">
                 <img src={defaultProfilePicture} alt="Badge" className="mb-4" />
-
                 <p>Badge 2</p>
               </div>
               <div className="h-32 w-32 rounded-md bg-gray-100 p-4 text-center">

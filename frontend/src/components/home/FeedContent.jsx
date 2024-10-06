@@ -4,9 +4,17 @@ import { useNavigate } from "react-router-dom";
 const FeedContent = ({ image, title, date, altText }) => {
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
-    navigate("/map", {});
+  const handleLearnMore = () => {
+    navigate("/map", {
+      state: {
+        title,
+        imageUrl: image,
+        date,
+        altText,
+      },
+    });
   };
+
   return (
     <div className="flex flex-col">
       <img
@@ -18,8 +26,8 @@ const FeedContent = ({ image, title, date, altText }) => {
         <h2 className="mb-2 text-2xl font-semibold">{title}</h2>
         <p className="mb-4 text-sm text-gray-500">{date}</p>
         <button
-          onClick={(e) => handleClick(e)}
-          className="bg-darker-base-color rounded px-4 py-2 text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80"
+          onClick={handleLearnMore}
+          className="rounded bg-darker-base-color px-4 py-2 text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80"
         >
           Learn More
         </button>
