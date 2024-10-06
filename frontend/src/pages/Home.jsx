@@ -12,14 +12,14 @@ import axios from "axios";
 const Home = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [posts, setPosts] = useState({});
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get("http://localhost:3000/posts");
         const data = response.data;
-        console.log(data);
+        console.log("Fetched posts:", data);
         setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -48,7 +48,7 @@ const Home = () => {
   return (
     <>
       <LoggedNavbar />
-      <div className="bg-lighter-base-color min-h-screen">
+      <div className="min-h-screen bg-lighter-base-color">
         <div className="mx-auto max-w-screen-lg pt-32">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {posts.length > 0 ? (
@@ -57,17 +57,38 @@ const Home = () => {
                   key={index}
                   image={`https://gateway.pinata.cloud/ipfs/${post.CIDs[0]}`} // Construct the full URL
                   title={post.title}
-                  date="1/1/24" // Assuming post._id contains the MongoDB ObjectId
+                  date="1/1/24" // You can format the date as needed
                   data={post}
                 />
               ))
             ) : (
               <p>Loading...</p>
             )}
-            <FeedContent image={testimg1} title="title1" date="1/1/24" />
-            <FeedContent image={testimg2} title="title2" date="1/1/24" />
-            <FeedContent image={testimg3} title="title3" date="1/1/24" />
-            <FeedContent image={testimg4} title="title4" date="1/1/24" />
+            {/* Sample FeedContent components with test images */}
+            <FeedContent
+              image={testimg1}
+              title="Sample Title 1"
+              date="1/1/24"
+              data={{}}
+            />
+            <FeedContent
+              image={testimg2}
+              title="Sample Title 2"
+              date="1/1/24"
+              data={{}}
+            />
+            <FeedContent
+              image={testimg3}
+              title="Sample Title 3"
+              date="1/1/24"
+              data={{}}
+            />
+            <FeedContent
+              image={testimg4}
+              title="Sample Title 4"
+              date="1/1/24"
+              data={{}}
+            />
           </div>
         </div>
         <div className="relative">
@@ -89,7 +110,7 @@ const Home = () => {
             )}
             <button
               onClick={handleFormOpen}
-              className="bg-darker-base-color flex h-14 w-14 items-center justify-center rounded-full text-2xl text-white shadow-md transition-all hover:scale-105 hover:opacity-80"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-darker-base-color text-2xl text-white shadow-md transition-all hover:scale-105 hover:opacity-80"
             >
               +
             </button>

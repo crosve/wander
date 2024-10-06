@@ -1,20 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { FaHeart, FaComment } from "react-icons/fa";
-import testimg1 from "../assets/test-images/test-1.jpg";
 import LoggedNavbar from "../components/LoggedNavbar";
 
+const generateRandomComments = () => {
+  const users = ["Alice", "Bob", "Charlie", "Diana", "Edward"];
+  const commentsPool = [
+    "Nice!",
+    "Cool place!",
+    "Highly recommended.",
+    "Awesome spot.",
+    "Loved it!",
+    "Had a great time here.",
+    "Worth visiting.",
+    "Beautiful place!",
+    "Amazing experience.",
+    "Would go again!",
+  ];
+  const commentsArray = [];
+  const numComments = Math.floor(Math.random() * 5) + 1;
+
+  for (let i = 0; i < numComments; i++) {
+    const randomUser = users[Math.floor(Math.random() * users.length)];
+    const randomComment =
+      commentsPool[Math.floor(Math.random() * commentsPool.length)];
+    commentsArray.push({ user: randomUser, text: randomComment });
+  }
+
+  return commentsArray;
+};
+
+const generateRandomLikes = () => {
+  return Math.floor(Math.random() * 100);
+};
+
 const MapsPage = () => {
+  const locationData = useLocation();
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+
   const [location, setLocation] = useState({
-    title: "Central Park",
-    imageUrl: testimg1,
-    likes: 99,
-    description: "This is central park",
-    comments: [
-      { user: "John", text: "cool place" },
-      { user: "Jane", text: "nice" },
-    ],
+    title: "Default Title",
+    imageUrl: "",
+    likes: generateRandomLikes(),
+    description: "Default description",
+    comments: generateRandomComments(),
+    lat: 40.785091,
+    long: -73.968285,
   });
 
+  // Update the location state when the component mounts
+  useEffect(() => {
+    console.log("Location data received in MapsPage:", locationData.state);
+
+    if (locationData.state) {
+      const { title, imageUrl, data } = locationData.state;
+
+      // Access Lat and Long from within the `data` object
+      const { Lat, Long } = data;
+
+      console.log("Using Lat, Long:", Lat, Long);
+
+      setLocation({
+        title: title || "Default Title",
+        imageUrl: imageUrl || "",
+        likes: generateRandomLikes(),
+        description: data.description || "Default description",
+        comments: generateRandomComments(),
+        lat: Lat || 40.785091, // Use `Lat` from `data`
+        long: Long || -73.968285, // Use `Long` from `data`
+      });
+    }
+  }, [locationData.state]);
+
+  // Load the Google Maps script and initialize the map after location is updated
   useEffect(() => {
     const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAL1kzmsE0Hzl28qm5Trp1_s76quJnsHEY`;
@@ -23,14 +82,19 @@ const MapsPage = () => {
     document.head.appendChild(script);
 
     script.onload = () => {
-      const map = new window.google.maps.Map(document.getElementById("map"), {
-        center: { lat: 40.785091, lng: -73.968285 },
-        zoom: 12,
-      });
+      // Initialize the map with updated location
+      mapRef.current = new window.google.maps.Map(
+        document.getElementById("map"),
+        {
+          center: { lat: location.lat, lng: location.long },
+          zoom: 12,
+        },
+      );
 
-      new window.google.maps.Marker({
-        position: { lat: 40.785091, lng: -73.968285 },
-        map: map,
+      // Initialize the marker
+      markerRef.current = new window.google.maps.Marker({
+        position: { lat: location.lat, lng: location.long },
+        map: mapRef.current,
         title: location.title,
       });
     };
@@ -38,7 +102,18 @@ const MapsPage = () => {
     return () => {
       document.head.removeChild(script);
     };
-  }, [location.title]);
+  }, [location.lat, location.long]);
+
+  // Update marker and map center whenever location's lat or long changes
+  useEffect(() => {
+    if (mapRef.current && markerRef.current) {
+      // Set new marker position
+      markerRef.current.setPosition({ lat: location.lat, lng: location.long });
+      // Center the map to new position
+      mapRef.current.setCenter({ lat: location.lat, lng: location.long });
+    }
+    console.log("Updated location:", location);
+  }, [location.lat, location.long]);
 
   return (
     <>

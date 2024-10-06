@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-base-color bg-opacity-80 px-8 py-4 font-thin backdrop-blur">
       <Link to="/" className="text-2xl">
-        Traktty
+        Wander
       </Link>
       {/* Hamburger menu btn */}
       <div className="block lg:hidden">

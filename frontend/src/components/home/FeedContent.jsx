@@ -5,6 +5,8 @@ const FeedContent = ({ image, title, date, altText, data }) => {
   const navigate = useNavigate();
 
   const handleLearnMore = () => {
+    console.log("working!!!");
+    console.log("Data being passed to MapsPage:", data);
     navigate("/map", {
       state: {
         title,
@@ -12,6 +14,8 @@ const FeedContent = ({ image, title, date, altText, data }) => {
         date,
         altText,
         data,
+        lat: data.lat,
+        long: data.long,
       },
     });
   };
@@ -25,10 +29,10 @@ const FeedContent = ({ image, title, date, altText, data }) => {
       />
       <div className="mt-4 text-center">
         <h2 className="mb-2 text-2xl font-semibold">{title}</h2>
-        <p className="mb-4 text-sm text-gray-500">{date}</p>
+        <p className="mb-4 text-sm text-gray-500">{data.description}</p>
         <button
           onClick={handleLearnMore}
-          className="bg-darker-base-color rounded px-4 py-2 text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80"
+          className="rounded bg-darker-base-color px-4 py-2 text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-opacity-80"
         >
           Learn More
         </button>
