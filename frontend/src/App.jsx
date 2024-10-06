@@ -29,7 +29,6 @@ function ProtectedRoute({ element }) {
 export default function App() {
   return (
     <Router>
-      <NavBar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />

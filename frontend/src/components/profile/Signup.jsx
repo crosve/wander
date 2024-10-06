@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import NavBar from "../NavBar";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
