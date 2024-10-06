@@ -26,7 +26,7 @@ Google Maps API key
 
    Install dependencies for both the frontend and backend:
 
-   Frontend:
+   ````Frontend:
 
    cd frontend
 
@@ -36,22 +36,30 @@ Google Maps API key
 
    cd backend
 
-   npm install
+   npm install```
+
+   ````
 
 3. Set Up Environment Variables:
    Create a .env file in the root of the backend folder and add the following environment variables:
 
    SUPABASE_URL=https://bgestvuowbnkkkftqchb.supabase.co/
+
    SUPABASE_KEY=your_supabase_key_here
+
    MONGODB_URI=your_mongodb_uri_here
+
    API_Key=your_api_key_here
+
    API_Secret=your_api_secret_here
+
    JWT=your_jwt_token_here
+
    JWT_TOKEN=your_jwt_token_here
 
 4. Run the Project
 
-   Frontend:
+   ````Frontend:
 
    cd frontend
 
@@ -61,6 +69,8 @@ Google Maps API key
 
    cd backend
 
-   npm start
+   npm start```
+
+   ````
 
 5. Access the Application at your local host.
