@@ -6,6 +6,7 @@ const { ObjectId } = require("mongodb");
 
 const { encrypt, decrypt } = require("../functions/encrypt");
 const { db } = require("../config/mongodb");
+const uploadImageRouter = require('./routes/uploadImage.js');
 
 require("dotenv").config();
 
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/uploadImage", (req, res) => {});
+app.use("/uploadImage", uploadImageRouter);
 
 app.post("/login", async (req, res) => {
   const { user, password } = req.body;
