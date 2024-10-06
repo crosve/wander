@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaHeart, FaComment } from "react-icons/fa";
 import testimg1 from "../assets/test-images/test-1.jpg";
+import LoggedNavbar from "../components/LoggedNavbar";
 
 const MapsPage = () => {
   const [location, setLocation] = useState({
@@ -40,40 +41,43 @@ const MapsPage = () => {
   }, [location.title]);
 
   return (
-    <div className="bg-lighter-base-color flex h-screen pt-20">
-      {/* Map */}
-      <div id="map" className="h-full w-2/3"></div>
+    <>
+      <LoggedNavbar />
+      <div className="bg-lighter-base-color flex h-screen pt-20">
+        {/* Map */}
+        <div id="map" className="h-full w-2/3"></div>
 
-      {/* Side container */}
-      <div className="bg-lighter-base-color h-full w-1/3 overflow-scroll overflow-y-auto p-6 shadow-lg">
-        <h2 className="mb-4 text-2xl">{location.title}</h2>
+        {/* Side container */}
+        <div className="bg-lighter-base-color h-full w-1/3 overflow-scroll overflow-y-auto p-6 shadow-lg">
+          <h2 className="mb-4 text-2xl">{location.title}</h2>
 
-        <img
-          src={location.imageUrl}
-          alt={location.title}
-          className="mb-4 rounded-lg shadow-md"
-        />
+          <img
+            src={location.imageUrl}
+            alt={location.title}
+            className="mb-4 rounded-lg shadow-md"
+          />
 
-        <div className="mb-4 flex items-center gap-2 text-lg">
-          <FaHeart className="text-blue-500" />
-          <span className="font-semibold">Likes: {location.likes}</span>
+          <div className="mb-4 flex items-center gap-2 text-lg">
+            <FaHeart className="text-blue-500" />
+            <span className="font-semibold">Likes: {location.likes}</span>
+          </div>
+
+          <p className="mb-4 text-lg">{location.description}</p>
+
+          <h3 className="mb-2 text-xl">
+            <FaComment className="mr-2 inline-block" /> Comments
+          </h3>
+          <ul className="space-y-4">
+            {location.comments.map((comment, index) => (
+              <li key={index} className="rounded-lg bg-white p-4 shadow-sm">
+                <p className="font-semibold">{comment.user}</p>
+                <p>{comment.text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <p className="mb-4 text-lg">{location.description}</p>
-
-        <h3 className="mb-2 text-xl">
-          <FaComment className="mr-2 inline-block" /> Comments
-        </h3>
-        <ul className="space-y-4">
-          {location.comments.map((comment, index) => (
-            <li key={index} className="rounded-lg bg-white p-4 shadow-sm">
-              <p className="font-semibold">{comment.user}</p>
-              <p>{comment.text}</p>
-            </li>
-          ))}
-        </ul>
       </div>
-    </div>
+    </>
   );
 };
 
