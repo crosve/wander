@@ -29,7 +29,7 @@ const ProfileSummary = () => {
               Authorization: `Bearer ${token}`,
             },
           });
-          console.log(response.data);
+          console.log(response.data.user);
           setUserData(response.data.user);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -83,7 +83,7 @@ const ProfileSummary = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
               ) : (
-                <h1 className="text-3xl">Hello,!</h1>
+                <h1 className="text-3xl">Hello, {userData.username}!</h1>
               )}
 
               {isEditing ? (
@@ -94,7 +94,7 @@ const ProfileSummary = () => {
                 />
               ) : (
                 <div className="text-lg">
-                  <span>Email: </span>
+                  <span>Email: {userData.email} </span>
                 </div>
               )}
             </div>
